@@ -10,8 +10,17 @@
     <h1>Movies</h1>
     <p v-if="movies.length === 0">There are no characters.</p>
     <ul v-else>
-        <li v-for="name in movies">{{name.name}}</li>
+        <li v-for="name in movies">{{name.name}}  <button @click="setFavourite(name)">Favorite</button></li>
+       
     </ul>
+ <h2>Fav characters</h2>
+ <ul v-if="favouriteList.length > 0">
+  <li v-for="character in favouriteList">{{character }}</li>
+</ul>
+<p v-else>No fav characters yet</p>
+
+
+
     <p><span v-for="(character, index) in movies">{{character.name}}
         {{index === movies.length - 1? '' : ", "}}
     </span></p>
@@ -28,8 +37,16 @@
                 {name: 'Zuko'},
                 {name: 'Toph'},
                 {name: 'Katara'},
-            ]
-  
+            ],
+            favouriteList: [],
+            }
+          },
+          methods: {
+            setFavourite(character, event) {
+              console.log(character.name)
+              if(!this.favouriteList.includes(character.name)) {
+                this.favouriteList.push(character.name)
+              }
             }
           }
         });
