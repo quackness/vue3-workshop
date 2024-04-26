@@ -1,54 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>Hello front end masters</h1>
-    <div id="app">
-      <h1>Counter</h1>
-      <p>{{ count }}</p>
-      <button @click="incrementCount">Increment count </button>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Hello front end masters</h1>
+  <div id="app">
+    <h1>Counter</h1>
+    <p>{{ count }}</p>
+    <button v-on:click="incrementCount">Increment count</button>
+    <div>
       <label for="incrementAmount">Increment by: </label>
-      <input type="number"></input>
-      <hr />
-      <!-- v-if & v-else  -->
-     <p v-if="message.length % 2 === 0">Even {{ message.toUpperCase()}}</p> 
-     <p v-else>Odd {{ message}}</p> 
-     <!-- v-for loop -->
-     <ul>
-      <li v-for="number in listOfNumbers">{{ number.name + " " + number.id }}</li>
-     </ul>
-     <hr />
-
-
+      <input type="number" v-bind:value="incrementAmount" @input="changeIncrementAmount(event)"></input>
     </div>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script>
-      const { createApp } = Vue;
-      const app = createApp({
-        data() {
-          return {
-            message: 'Hello it works!',
-            listOfNumbers: [{name: 'test', id:Math.random()},{name: 'test2', id:Math.random()},{name: 'test3', id:Math.random()},{name: 'test4', id:Math.random()},{name:'test5', id:Math.random()}],
-            count: 10,
-            incrementCount: 1,
+    <hr />
+    <!-- v-if & v-else  -->
+    <p v-if="message.length % 2 === 0">Even {{ message.toUpperCase()}}</p>
+    <p v-else>Odd {{ message}}</p>
+    <!-- v-for loop -->
+    <ul>
+      <li v-for="number in listOfNumbers">{{ number.name + " " + number.id }}</li>
+    </ul>
+    <hr />
 
-          }
-        },
+
+  </div>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp } = Vue;
+    const app = createApp({
+      data() {
+        return {
+          message: 'Hello it works!',
+          listOfNumbers: [{ name: 'test', id: Math.random() }, { name: 'test2', id: Math.random() }, { name: 'test3', id: Math.random() }, { name: 'test4', id: Math.random() }, { name: 'test5', id: Math.random() }],
+          count: 10,
+          incrementAmount: 8,
+
+        }
+      },
       methods: {
+        changeIncrementAmount(event) {
+          console.log(event)
+        },
         incrementCount() {
-          this.count++;
+          this.count += this.incrementAmount;
         }
       }
     }
-    
+
     );
-      app.mount('#app');
-;
-    </script>
-  </body>
+    app.mount('#app');
+    ;
+  </script>
+</body>
+
 </html>
