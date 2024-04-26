@@ -19,6 +19,13 @@
 </ul>
 <p v-else>No fav characters yet</p>
 
+<h2>New character</h2>
+<pre>
+  {{newCharacter}}
+</pre>
+<label for="character-name">Name</label>
+<input type="text" id="character-name" v-model="newCharacter.name" @keyup.enter="addNewCharacter">
+
 
 
     <p><span v-for="(character, index) in movies">{{character.name}}
@@ -31,6 +38,9 @@
         const app = createApp({
           data() {
             return {
+              newCharacter: {
+                name: '',
+              },
               message: 'Movies list characters',
               movies: [
                 {name: 'Aang'},
@@ -42,6 +52,10 @@
             }
           },
           methods: {
+            addNewCharacter(event) {
+              this.movies.push(this.newCharacter);
+              this.newCharacter = '';
+            },
             setFavourite(character, event) {
               console.log(character.name)
               if(!this.favouriteList.includes(character.name)) {
