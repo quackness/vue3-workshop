@@ -6,5 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Hello front end masters</h1>
+    <div id="app">
+      <!-- v-if & v-else  -->
+     <p v-if="message.length % 2 === 0">Even {{ message.toUpperCase()}}</p> 
+     <p v-else>Odd {{ message}}</p> 
+     <!-- v-for loop -->
+     <ul>
+      <li v-for="number in listOfNumbers">{{ number.name + " " + number.id }}</li>
+     </ul>
+
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp } = Vue;
+      const app = createApp({
+        data() {
+          return {
+            message: 'Hello it works!',
+            listOfNumbers: [{name: 'test', id:Math.random()},{name: 'test2', id:Math.random()},{name: 'test3', id:Math.random()},{name: 'test4', id:Math.random()},{name:'test5', id:Math.random()}]
+
+          }
+        }
+      });
+      app.mount('#app');
+;
+    </script>
+  </body>
 </html>
