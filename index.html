@@ -12,11 +12,14 @@
   <h1>Hello front end masters</h1>
   <div id="app">
     <h1>Counter</h1>
-    <p>{{ count }}</p>
-    <button v-on:click="incrementCount">Increment count</button>
+    <p :data-increment-by="incrementAmount">{{ count }}</p>
+    <button @click="incrementCount">Increment count</button>
+    <h1>{{ incrementAmount }}</h1>
     <div>
       <label for="incrementAmount">Increment by: </label>
-      <input type="number" v-bind:value="incrementAmount" @input="changeIncrementAmount(event)"></input>
+      <input type="number" 
+      v-model="incrementAmount">
+    </input>
     </div>
     <hr />
     <!-- v-if & v-else  -->
@@ -44,9 +47,6 @@
         }
       },
       methods: {
-        changeIncrementAmount(event) {
-          console.log(event)
-        },
         incrementCount() {
           this.count += this.incrementAmount;
         }
