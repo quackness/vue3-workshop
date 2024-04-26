@@ -7,7 +7,11 @@
 </head>
 <body>
     <div id="app">
-    <h1>Movies</h1>
+    <h1>Statistics</h1>
+    <ul>
+  {{ statsBendersList}}
+    </ul>
+    <h2>Characters</h2>
     <p v-if="movies.length === 0">There are no characters.</p>
     <ul v-else>
         <li v-for="name in movies">{{name.name}}  <button @click="setFavourite(name)">Favorite</button></li>
@@ -40,17 +44,38 @@
             return {
               newCharacter: {
                 name: '',
+                element: []
               },
               message: 'Movies list characters',
               movies: [
-                {name: 'Aang'},
-                {name: 'Zuko'},
-                {name: 'Toph'},
-                {name: 'Katara'},
+                {name: 'Aang', element:['air', 'earth', 'water', 'fire']},
+                {name: 'Zuko', element:['fire']},
+                {name: 'Toph', element:['earth']},
+                {name: 'Katara', element:['water']},
             ],
             favouriteList: [],
             }
           },
+          computed: {
+           statsBendersList() {
+            const elements = ['air', 'earth', 'water', 'fire'];
+            const statistics = {
+              air: 0,
+              earth: 0,
+              water: 0,
+              fire: 0
+            };
+
+            this.movies.forEach(character => {
+              elements.forEach(element => {
+                if (character.element.indexOf(element) > -1) {
+                  statistics[element] += 1;
+                }
+            })
+          })
+              return statistics;
+          }
+        },
           methods: {
             addNewCharacter(event) {
               this.movies.push(this.newCharacter);
