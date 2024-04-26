@@ -9,6 +9,12 @@
   <body>
     <h1>Hello front end masters</h1>
     <div id="app">
+      <h1>Counter</h1>
+      <p>{{ count }}</p>
+      <button @click="incrementCount">Increment count </button>
+      <label for="incrementAmount">Increment by: </label>
+      <input type="number"></input>
+      <hr />
       <!-- v-if & v-else  -->
      <p v-if="message.length % 2 === 0">Even {{ message.toUpperCase()}}</p> 
      <p v-else>Odd {{ message}}</p> 
@@ -16,6 +22,8 @@
      <ul>
       <li v-for="number in listOfNumbers">{{ number.name + " " + number.id }}</li>
      </ul>
+     <hr />
+
 
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -25,11 +33,20 @@
         data() {
           return {
             message: 'Hello it works!',
-            listOfNumbers: [{name: 'test', id:Math.random()},{name: 'test2', id:Math.random()},{name: 'test3', id:Math.random()},{name: 'test4', id:Math.random()},{name:'test5', id:Math.random()}]
+            listOfNumbers: [{name: 'test', id:Math.random()},{name: 'test2', id:Math.random()},{name: 'test3', id:Math.random()},{name: 'test4', id:Math.random()},{name:'test5', id:Math.random()}],
+            count: 10,
+            incrementCount: 1,
 
           }
+        },
+      methods: {
+        incrementCount() {
+          this.count++;
         }
-      });
+      }
+    }
+    
+    );
       app.mount('#app');
 ;
     </script>
