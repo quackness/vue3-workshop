@@ -1,47 +1,29 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script>
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div id="app">
+    <h1>{{ displayTitle }}</h1>
+    <p :data-increment-by="incrementAmount">{{ count }}</p>
+    <button @click="incrementCount">Increment count</button>
+    <h1>{{ incrementAmount }}</h1>
+    <p>{{ optimizedIncrementAmount }}</p>
+    <div>
+      <label for="incrementAmount">Increment by: </label>
+      <input type="number" v-model="incrementAmount">
+      </input>
     </div>
-  </header>
+    <hr />
+    <!-- v-if & v-else  -->
+    <p v-if="message.length % 2 === 0">Even {{ message.toUpperCase()}}</p>
+    <p v-else>Odd {{ message}}</p>
+    <!-- v-for loop -->
+    <ul>
+      <li v-for="number in listOfNumbers">{{ number.name + " " + number.id }}</li>
+    </ul>
+    <hr />
 
-  <main>
-    <TheWelcome />
-  </main>
+
+  </div>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
