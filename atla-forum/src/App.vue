@@ -1,46 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ message }}</title>
-</head>
-<body>
-    <div id="app">
-    <h1>Statistics</h1>
-    <ul>
-  {{ statsBendersList}}
-    </ul>
-    <h2>Characters</h2>
-    <p v-if="movies.length === 0">There are no characters.</p>
-    <ul v-else>
-        <li v-for="name in movies">{{name.name}}  <button @click="setFavourite(name)">Favorite</button></li>
-       
-    </ul>
- <h2>Fav characters</h2>
- <ul v-if="favouriteList.length > 0">
-  <li v-for="character in favouriteList">{{character }}</li>
-</ul>
-<p v-else>No fav characters yet</p>
-
-<h2>New character</h2>
-<pre>
-  {{newCharacter}}
-</pre>
-<label for="character-name">Name</label>
-<input type="text" id="character-name" v-model="newCharacter.name" @keyup.enter="addNewCharacter">
-
-
-
-    <p><span v-for="(character, index) in movies">{{character.name}}
-        {{index === movies.length - 1? '' : ", "}}
-    </span></p>
-    </div>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script>
-        const { createApp } = Vue;
-        const app = createApp({
-          data() {
+<script>
+export default {
+  data() {
             return {
               newCharacter: {
                 name: '',
@@ -88,9 +48,51 @@
               }
             }
           }
-        });
-        app.mount('#app');
-  ;
-      </script>
-</body>
-</html>
+}
+
+</script>
+
+<template>
+     <div id="app">
+    <h1>Statistics</h1>
+    <ul> Reduce function: 
+  {{ statsBendersList}}
+    </ul>
+    <ul>
+      <li v-for="(stat, type) in statsBendersList" :key="`bender-${stat}-${type}`">{{ type }} : {{ stat}}</li>
+    </ul>
+    <h2>Characters</h2>
+    <p v-if="movies.length === 0">There are no characters.</p>
+    <ul v-else>
+        <li v-for="(name, index) in movies" :key="`even-character-${index}`">
+          {{name.name}}  
+          <button @click="setFavourite(name)">
+            Favorite
+          </button>
+        </li>
+       
+    </ul>
+ <h2>Fav characters</h2>
+ <ul v-if="favouriteList.length > 0">
+  <li v-for="(character, index) in favouriteList" :key="`odd-character-${index}`">{{character }}</li>
+</ul>
+<p v-else>No fav characters yet</p>
+
+<h2>New character</h2>
+<pre>
+  {{newCharacter}}
+</pre>
+<label for="character-name">Name</label>
+<input type="text" id="character-name" v-model="newCharacter.name" @keyup.enter="addNewCharacter">
+
+
+
+    <p><span v-for="(character, index) in movies" :key="`comma-list-character-${index}`">{{character.name}}
+        {{index === movies.length - 1? '' : ", "}}
+    </span></p>
+    </div>
+</template>
+
+<style scoped>
+
+</style>
