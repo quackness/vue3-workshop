@@ -1,8 +1,9 @@
 <script>
+import BaseCounter from './components/BaseCounter.vue';
 export default {
+  components: { BaseCounter },
     data() {
         return {
-          counterTitle: 'Counter Standard',
           message: 'Hello it works!!',
           listOfNumbers: [
             { name: '1', id: Math.random(), list: [1, 2, 3]}, 
@@ -11,49 +12,14 @@ export default {
             { name: '4', id: Math.random(), list: [1, 2, 3]}, 
             { name: '5', id: Math.random(), list: [1, 2, 3]}
           ],
-          count: 10,
-          incrementAmount: 8,
-
         }
       },
-      computed: {
-        displayTitle() {
-          if (this.count > 20) {
-            return 'Counter Standard - Very Long'
-          } else {
-            return 'Counter Standard'
-          }
-        },
-        optimizedIncrementAmount() {
-          return this.displayTitle.length * this.incrementAmount
-        }
-      },
-      methods: {
-        incrementCount() {
-          this.count += this.optimizedIncrementAmount;
-        }
-      },
-      watch: {
-        count(newValue) {
-          console.log(newValue)
-        }
-
-      }
   };
 </script>
 
 <template>
+  <BaseCounter />
 
-    <h1>{{ displayTitle }}</h1>
-    <p :data-increment-by="incrementAmount">{{ count }}</p>
-    <button @click="incrementCount">Increment count</button>
-    <h1>{{ incrementAmount }}</h1>
-    <p>{{ optimizedIncrementAmount }}</p>
-    <div>
-      <label for="incrementAmount">Increment by: </label>
-      <input type="number" v-model="incrementAmount">
-      </input>
-    </div>
     <hr />
     <!-- v-if & v-else  -->
     <p v-if="message.length % 2 === 0">Even {{ message.toUpperCase()}}</p>
