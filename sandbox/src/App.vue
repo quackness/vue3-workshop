@@ -21,12 +21,21 @@ export default {
           }
         }
       },
+      computed: {
+        refinedUserData() {
+          return {
+            name: this.userData.name,
+            favoriteFood: this.userData.favoriteFood,
+          }
+        }
+      }
   };
 </script>
 
 <template>
   <!-- <UserCard :user="userData"/> -->
-  <UserCard :name="userData.name" :favoriteFood="userData.favoriteFood" />
+  <!-- <UserCard :name="userData.name" :favoriteFood="userData.favoriteFood" /> -->
+  <UserCard :user="refinedUserData"/>
     <hr />
     <!-- v-if & v-else  -->
     <p v-if="message.length % 2 === 0">Even {{ message.toUpperCase()}}</p>
