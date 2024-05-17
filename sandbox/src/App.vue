@@ -28,6 +28,11 @@ export default {
             favoriteFood: this.userData.favoriteFood,
           }
         }
+      },
+      methods: {
+        changeName() {
+          this.userData.name = 'Charlie';
+        }
       }
   };
 </script>
@@ -35,7 +40,9 @@ export default {
 <template>
   <!-- <UserCard :user="userData"/> -->
   <!-- <UserCard :name="userData.name" :favoriteFood="userData.favoriteFood" /> -->
-  <UserCard :user="refinedUserData"/>
+  <!-- listen for the event to happen -->
+  <UserCard :user="refinedUserData" @change-name="changeName"/>
+  <button @click="changeName">Change now</button>
     <hr />
     <!-- v-if & v-else  -->
     <p v-if="message.length % 2 === 0">Even {{ message.toUpperCase()}}</p>
