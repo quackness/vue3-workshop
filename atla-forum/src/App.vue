@@ -1,5 +1,7 @@
 <script>
+import BendersStats from './components/BendersStats.vue';
 export default {
+  components: { BendersStats },
   data() {
             return {
               newCharacter: {
@@ -16,26 +18,7 @@ export default {
             favouriteList: [],
             }
           },
-          computed: {
-           statsBendersList() {
-            const elements = ['air', 'earth', 'water', 'fire'];
-            const statistics = {
-              air: 0,
-              earth: 0,
-              water: 0,
-              fire: 0
-            };
 
-            this.movies.forEach(character => {
-              elements.forEach(element => {
-                if (character.element.indexOf(element) > -1) {
-                  statistics[element] += 1;
-                }
-            })
-          })
-              return statistics;
-          }
-        },
           methods: {
             addNewCharacter(event) {
               this.movies.push(this.newCharacter);
@@ -54,13 +37,7 @@ export default {
 
 <template>
      <div id="app">
-    <h1>Statistics</h1>
-    <ul> Reduce function: 
-  {{ statsBendersList}}
-    </ul>
-    <ul>
-      <li v-for="(stat, type) in statsBendersList" :key="`bender-${stat}-${type}`">{{ type }} : {{ stat}}</li>
-    </ul>
+ <BendersStats :movies="movies"/>
     <h2>Characters</h2>
     <p v-if="movies.length === 0">There are no characters.</p>
     <ul v-else>
