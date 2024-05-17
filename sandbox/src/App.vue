@@ -1,7 +1,8 @@
 <script>
 import BaseCounter from './components/BaseCounter.vue';
+import UserCard from './components/user-card.vue';
 export default {
-  components: { BaseCounter },
+  components: { BaseCounter, UserCard},
     data() {
         return {
           message: 'Hello it works!!',
@@ -12,14 +13,20 @@ export default {
             { name: '4', id: Math.random(), list: [1, 2, 3]}, 
             { name: '5', id: Math.random(), list: [1, 2, 3]}
           ],
+          userData: {
+            name: 'Ben',
+            preferredFramework: 'vue',
+            favoriteFood: "sushi",
+            favoriteNumbers: [8,10,12]
+          }
         }
       },
   };
 </script>
 
 <template>
-  <BaseCounter />
-
+  <!-- <UserCard :user="userData"/> -->
+  <UserCard :name="userData.name" :favoriteFood="userData.favoriteFood" />
     <hr />
     <!-- v-if & v-else  -->
     <p v-if="message.length % 2 === 0">Even {{ message.toUpperCase()}}</p>
