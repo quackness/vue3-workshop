@@ -1,8 +1,12 @@
 <script>
 import BaseCounter from './components/BaseCounter.vue';
 import UserCard from './components/user-card.vue';
+import BaseButton from './components/BaseButton.vue';
+import BaseLayout from './components/BaseLayout.vue';
+
+
 export default {
-  components: { BaseCounter, UserCard},
+  components: { BaseCounter, UserCard, BaseButton, BaseLayout},
     data() {
         return {
           message: 'Hello it works!!',
@@ -41,7 +45,15 @@ export default {
   <!-- <UserCard :user="userData"/> -->
   <!-- <UserCard :name="userData.name" :favoriteFood="userData.favoriteFood" /> -->
   <!-- listen for the event to happen -->
-  <UserCard :user="refinedUserData" @change-name="changeName"/>
+  <!-- <BaseButton>Arrow Left - Hi</BaseButton> -->
+  <!-- <BaseButton>{{ userData.name }}</BaseButton> -->
+  <BaseLayout>
+    <template v-slot:sidebar> This is aside block from BaseLayout</template>
+    <template v-slot:main>   <UserCard :user="refinedUserData" @change-name="changeName"/></template>
+    <template v-slot:footer> This is footer block from BaseLayout</template>
+  </BaseLayout>
+  <BaseButton :left="true"></BaseButton>
+
   <button @click="changeName">Change now</button>
     <hr />
     <!-- v-if & v-else  -->
