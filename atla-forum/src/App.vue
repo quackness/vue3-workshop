@@ -1,7 +1,9 @@
 <script>
 import BendersStats from './components/BendersStats.vue';
+import CharacterList from './components/CharacterList.vue';
+
 export default {
-  components: { BendersStats },
+  components: { BendersStats, CharacterList},
   data() {
             return {
               newCharacter: {
@@ -24,13 +26,14 @@ export default {
               this.movies.push(this.newCharacter);
               this.newCharacter = '';
             },
-            setFavourite(character, event) {
-              console.log(character.name)
-              if(!this.favouriteList.includes(character.name)) {
-                this.favouriteList.push(character.name)
-              }
+            addFavoriteCharacter(payLoad) {
+              console.log(">>", payLoad)
+              if(!this.favouriteList.includes(payLoad.name)) {
+                this.favouriteList.push(payLoad.name)
             }
+
           }
+        }
 }
 
 </script>
@@ -42,10 +45,7 @@ export default {
     <p v-if="movies.length === 0">There are no characters.</p>
     <ul v-else>
         <li v-for="(name, index) in movies" :key="`even-character-${index}`">
-          {{name.name}}  
-          <button @click="setFavourite(name)">
-            Favorite
-          </button>
+        <CharacterList :name="name" @favorite="addFavoriteCharacter"/>
         </li>
        
     </ul>
